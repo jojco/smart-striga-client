@@ -1,32 +1,141 @@
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
-// https://github.com/microsoft/vscode-dev-containers/tree/v0.217.4/containers/typescript-node
 {
-	"name": "Node.js & TypeScript",
-	"build": {
-		"dockerfile": "Dockerfile",
-		// Update 'VARIANT' to pick a Node version: 16, 14, 12.
-		// Append -bullseye or -buster to pin to an OS version.
-		// Use -bullseye variants on local on arm64/Apple Silicon.
-		"args": { 
-			"VARIANT": "16-bullseye"
-		}
-	},
-
-	// Set *default* container specific settings.json values on container create.
-	"settings": {},
-
-
-	// Add the IDs of extensions you want installed when the container is created.
-	"extensions": [
-		"dbaeumer.vscode-eslint"
-	],
-
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
-
-	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "yarn install",
-
-	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-	"remoteUser": "node"
+  "name": "Smart Striga Client",
+  "runArgs": ["--name=striga", "--net=intranet"],
+  "workspaceMount": "source=${localWorkspaceFolder},target=/app,type=bind",
+  "workspaceFolder": "/app",
+  "build": {
+    "dockerfile": "../Dockerfile",
+    "context": "..",
+    "target": "development",
+    "args": {
+      "NODE_VERSION": "16-bullseye"
+    }
+  },
+  "extensions": [
+    "Gruntfuggly.todo-tree",
+    "IronGeek.vscode-env",
+    "Lokalise.i18n-ally",
+    "MisterJ.vue-volar-extention-pack",
+    "Vue.volar",
+    "Wscats.vue",
+    "ZixuanChen.vitest-explorer",
+    "christian-kohler.path-intellisense",
+    "dbaeumer.vscode-eslint",
+    "formulahendry.auto-close-tag",
+    "formulahendry.auto-rename-tag",
+    "mhutchie.git-graph",
+    "mikestead.dotenv",
+    "ms-edgedevtools.vscode-edge-devtools",
+    "naumovs.color-highlight",
+    "sdras.vue-vscode-snippets",
+    "steoates.autoimport",
+    "usernamehw.errorlens",
+    "xabikos.JavaScriptSnippets",
+    "GraphQL.vscode-graphql"
+  ],
+  // INFO: If you want another settings or force your own settings, please insert it in your ".vscode/settings.json".
+  "settings": {
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "terminal.integrated.tabs.title": "${remoteName}${process}${cwd}",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "workbench.editor.labelFormat": "short",
+    "window.title": "Smart Striga Client",
+    "remote.localPortHost": "allInterfaces",
+    // INFO: i18 ally Localizations extension.
+    "i18n-ally.localesPaths": ["locales"],
+    "i18n-ally.sortKeys": true,
+    "i18n-ally.sourceLanguage": "en-US",
+    "i18n-ally.displayLanguage": "en-US",
+    "i18n-ally.enabledFrameworks": ["vue", "ngx-translate"],
+    "i18n-ally.keystyle": "nested",
+    "prettier.semi": false,
+    "prettier.stylelintIntegration": true,
+    // INFO: TODO Tree extension.
+    "todo-tree.general.tags": ["TODO", "FIXME", "WARN", "INFO", "BUG"],
+    "todo-tree.highlights.defaultHighlight": {
+      "icon": "alert",
+      "type": "text",
+      "opacity": 50,
+      "rulerLane": "full"
+    },
+    // TODO: Setting.
+    "todo-tree.highlights.customHighlight": {
+      "TODO": {
+        "icon": "bookmark",
+        "background": "#0061355b",
+        "foreground": "#61c747",
+        "iconColour": "#61c747",
+        "rulerColour": "#61c747",
+        "gutterIcon": true,
+        "type": "whole-line",
+        "rulerLane": "full"
+      },
+      // FIXME: Setting.
+      "FIXME": {
+        "icon": "flame",
+        "background": "#82192559",
+        "foreground": "#da713c",
+        "iconColour": "#da713c",
+        "rulerColour": "#da713c",
+        "gutterIcon": true,
+        "rulerLane": "full",
+        "type": "whole-line"
+      },
+      // INFO: Setting
+      "INFO": {
+        "icon": "book",
+        "background": "#196f8259",
+        "foreground": "#3ccfda",
+        "iconColour": "#3ccfda",
+        "rulerColour": "#3ccfda",
+        "gutterIcon": true,
+        "rulerLane": "full",
+        "type": "whole-line"
+      },
+      // WARN: Setting
+      "WARN": {
+        "icon": "alert",
+        "background": "#825f1959",
+        "foreground": "#dac23c",
+        "iconColour": "#dac23c",
+        "rulerColour": "#dac23c",
+        "gutterIcon": true,
+        "rulerLane": "full",
+        "type": "whole-line"
+      },
+      // BUG: Setting
+      "BUG": {
+        "icon": "bug",
+        "background": "#82192571",
+        "foreground": "#da3c51",
+        "iconColour": "#da3c51",
+        "rulerColour": "#da3c51",
+        "gutterIcon": true,
+        "rulerLane": "full",
+        "type": "whole-line"
+      }
+    },
+    // INFO: Yaml Sort extension
+    "vscode-yaml-sort.sortOnSave": 1,
+    "vscode-yaml-sort.customSortKeywords_1": [
+      "apiVersion",
+      "kind",
+      "metadata",
+      "spec",
+      "data"
+    ],
+    // INFO: Brackets fix
+    "editor.language.colorizedBracketPairs": [
+      ["{", "}"],
+      ["[", "]"],
+      ["(", ")"]
+    ]
+  },
+  "postCreateCommand": "yarn install",
+  "postAttachCommand": "/bin/bash .devcontainer/entrypoint.sh",
+  "remoteUser": "node"
 }
