@@ -1,6 +1,11 @@
 <template>
   <div class="container mx-auto flex gap-8 p-16">
-    <Navigation />
+    <div class="relative h-screen">
+      <div class="sticky top-32">
+        <Navigation />
+      </div>
+    </div>
+
     <Shortcuts />
 
     <NuxtPage />
