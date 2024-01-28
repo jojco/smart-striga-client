@@ -1,0 +1,119 @@
+{
+    "openapi": "3.0.0",
+    "paths": {
+        "/w1": {
+            "get": {
+                "operationId": "AppController_get1",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Temperature in Celsius.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/W1SensorResponseList"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/scd30": {
+            "get": {
+                "operationId": "AppController_get2",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Temperature in Celsius.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SCD30Response"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "info": {
+        "title": "Cats example",
+        "description": "The cats API description",
+        "version": "1.0",
+        "contact": {}
+    },
+    "tags": [
+        {
+            "name": "cats",
+            "description": ""
+        }
+    ],
+    "servers": [],
+    "components": {
+        "schemas": {
+            "W1SensorResponse": {
+                "type": "object",
+                "properties": {
+                    "sensor": {
+                        "type": "string",
+                        "example": "28-000000000a5d",
+                        "description": "Sensor Name."
+                    },
+                    "temperature": {
+                        "type": "number",
+                        "example": 23.01,
+                        "description": "Measured temperature in Celsius."
+                    }
+                },
+                "required": [
+                    "sensor",
+                    "temperature"
+                ]
+            },
+            "W1SensorResponseList": {
+                "type": "object",
+                "properties": {
+                    "sensors": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/W1SensorResponse"
+                        }
+                    }
+                },
+                "required": [
+                    "sensors"
+                ]
+            },
+            "SCD30Response": {
+                "type": "object",
+                "properties": {
+                    "co2Concentration": {
+                        "type": "number",
+                        "example": 1,
+                        "description": "The age of the Cat"
+                    },
+                    "temperature": {
+                        "type": "number",
+                        "example": 1,
+                        "description": "The age of the Cat"
+                    },
+                    "relativeHumidity": {
+                        "type": "number",
+                        "example": 1,
+                        "description": "The age of the Cat"
+                    }
+                },
+                "required": [
+                    "co2Concentration",
+                    "temperature",
+                    "relativeHumidity"
+                ]
+            }
+        }
+    }
+}
