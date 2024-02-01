@@ -1,14 +1,13 @@
 <template>
-  <div class="container mx-auto flex gap-8 p-16">
-    <div class="relative h-screen">
-      <div class="sticky top-32">
-        <Navigation />
-      </div>
-    </div>
-
+  <div class="dark:bg-gray-950 ">
     <Shortcuts />
-
     <NuxtPage />
-
   </div>
 </template>
+
+
+<script setup>
+defineNuxtRouteMiddleware((to, from ) => {
+  if ( to === '/') navigateTo('/home');
+})
+</script>
