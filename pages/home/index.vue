@@ -90,11 +90,13 @@
 
 <script setup lang="ts">
 import { type SCD30Response, type W1SensorResponseList } from '~/__api__'
-// const w1 = await useFetch('http://raspberrypi.local:3000/w1')
-const { pending: pendingSCD30, data: SCD30, refresh: refreshSCD30 } = await useLazyFetch<SCD30Response>('http://raspberrypi.local:3000/scd30')
-const { pending: pendingW1, data: W1, refresh: refreshW1 } = await useLazyFetch<W1SensorResponseList>('http://raspberrypi.local:3000/w1')
 
-const { pending: pendingGPIO, data: gpio, execute } = await useLazyFetch<W1SensorResponseList>('http://raspberrypi.local:3000/gpio', { method: 'POST', params: {pin: 29, on: 'on'} })
+const config = useRuntimeConfig()
+// const w1 = await useFetch('http://raspberrypi.local:3000/w1')
+const { pending: pendingSCD30, data: SCD30, refresh: refreshSCD30 } = await useLazyFetch<SCD30Response>(`${config.public.api}/scd30`)
+const { pending: pendingW1, data: W1, refresh: refreshW1 } = await useLazyFetch<W1SensorResponseList>(`${config.public.api}/w1`)
+
+const { pending: pendingGPIO, data: gpio, execute } = await useLazyFetch<W1SensorResponseList>(`${config.public.api}/gpi`, { method: 'POST', params: {pin: 29, on: 'on'} })
 
 const testSwitch = ref(false)
 watch(testSwitch, () => {

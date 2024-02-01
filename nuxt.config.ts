@@ -4,5 +4,10 @@ export default defineNuxtConfig({
   modules: ['@nuxt/ui'],
   ui: {
     icons: ["ph"]
+  },
+  runtimeConfig: {
+    public: {
+      api: 'http://raspberrypi.local:3000'
+    }
   }
 })
